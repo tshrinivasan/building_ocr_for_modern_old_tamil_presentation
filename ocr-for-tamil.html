@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Building OCR for Old &amp; Modern Tamil Letters</title>
+<meta name="author" content="(Shrinivasan T)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<!--
+<link rel="stylesheet" href="file:///home/shrini/disroot-nextcloud/org-mode/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="file:///home/shrini/disroot-nextcloud/org-mode/reveal.js/dist/theme/serif.css" id="theme"/>
+-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/js/reveal.js" integrity="sha512-4TbxHVUZM3pE/X0OGqnsz0N8bf1+g5p8x1SHHw3g0wh9dzjPZ+jyQn5qXJ62r0vXTKJ4at4ljO2d/7X2REIdAQ==" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/reveal.min.css" integrity="sha512-V5fKCVKOFy36w8zJmLzPH5R6zU6KvuHOvxfMRczx2ZeqTjKRGSBO9yiZjCKEJS3n6EmENwrH/xvSwXqxje+VVA==" crossorigin="anonymous" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/theme/serif.min.css" integrity="sha512-I/U05uA3A8M7xG5VrG/U+ESfYyVGxL3KsX9A4KHDeWRE/jHX5oEwHZ+RVL3d6DeBTZs6l85jY7gyv+9AEBcaww==" crossorigin="anonymous" />
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'file:///home/shrini/disroot-nextcloud/org-mode/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">Building OCR for Old &amp; Modern Tamil Letters</h1><h2 class="author">Shrinivasan T</h2><p class="date">Created: 2020-08-09 Sun 12:50</p>
+</section>
+
+
+<section>
+<section id="slide-orgfcf15d0">
+<h2 id="orgfcf15d0">T Shrinivasan</h2>
+<p>
+tshrinivasan@gmail.com
+</p>
+
+<p>
+Kaniyam Foundation
+</p>
+
+
+<div class="figure">
+<p><img src="./images/kaniyam.jpg" alt="kaniyam.jpg" />
+</p>
+</div>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgb1d2475">
+<h2 id="orgb1d2475">OCR -&gt; Optical Character Recognition</h2>
+<p>
+Get text from Images
+</p>
+
+
+
+<div class="figure">
+<p><img src="./images/OCR.jpg" alt="OCR.jpg" height="70%," width="70%" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org27fd0ea">
+<h2 id="org27fd0ea">OCR Workflow</h2>
+
+<div class="figure">
+<p><img src="./images/ocr_flow.png" alt="ocr_flow.png" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org8885e95">
+<h2 id="org8885e95">Extract Data</h2>
+
+<div class="figure">
+<p><img src="./images/OCR_illustration-2.gif" alt="OCR_illustration-2.gif" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb944da7">
+<h2 id="orgb944da7">Available OCR</h2>
+<ul>
+<li>Abby ( Proprietary )</li>
+
+<li>Google OCR (Proprietary)</li>
+
+<li>Tesseract (Free/Open Source Software)</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org42a9940">
+<h2 id="org42a9940">Tesseract</h2>
+<p>
+It is free software, released under the Apache License.
+</p>
+
+<p>
+Originally developed by HP at 1980s.
+</p>
+
+<p>
+It was released as open source in 2005
+</p>
+
+<p>
+Development has been sponsored by Google since 2006.
+</p>
+
+
+
+<p>
+<a href="https://tesseract-ocr.github.io/">https://tesseract-ocr.github.io/</a>
+</p>
+
+
+<p>
+<a href="https://nanonets.com/blog/ocr-with-tesseract/">https://nanonets.com/blog/ocr-with-tesseract/</a>
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgb8f8a1a">
+<h2 id="orgb8f8a1a">Features</h2>
+<p>
+Command line
+</p>
+
+<p>
+Input is Image only
+</p>
+
+<p>
+tesseract myimage.png myimage.txt -l eng+tam+mal
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org9950e8f">
+<h2 id="org9950e8f">Supported languages</h2>
+<p>
+106 languages
+</p>
+<pre  class="example">
+afr (Afrikaans), amh (Amharic), ara (Arabic), asm (Assamese), aze (Azerbaijani),
+aze_cyrl (Azerbaijani - Cyrilic), bel (Belarusian), ben (Bengali), bod
+(Tibetan), bos (Bosnian), bre (Breton), bul (Bulgarian), cat (Catalan;
+Valencian), ceb (Cebuano), ces (Czech), chi_sim (Chinese simplified), chi_tra
+(Chinese traditional), chr (Cherokee), cym (Welsh), dan (Danish), deu (German),
+dzo (Dzongkha), ell (Greek, Modern, 1453-), eng (English), enm (English, Middle,
+1100-1500), epo (Esperanto), equ (Math / equation detection module), est
+(Estonian), eus (Basque), fas (Persian), fin (Finnish), fra (French), frk
+(Frankish), frm (French, Middle, ca.1400-1600), gle (Irish), glg (Galician), grc
+(Greek, Ancient, to 1453), guj (Gujarati), hat (Haitian; Haitian Creole), heb
+(Hebrew), hin (Hindi), hrv (Croatian), hun (Hungarian), iku (Inuktitut), ind
+(Indonesian), isl (Icelandic), ita (Italian), ita_old (Italian - Old), jav
+(Javanese), jpn (Japanese), kan (Kannada), kat (Georgian), kat_old (Georgian -
+Old), kaz (Kazakh), khm (Central Khmer), kir (Kirghiz; Kyrgyz), kmr (Kurdish
+Kurmanji), kor (Korean), kor_vert (Korean vertical), kur (Kurdish), lao (Lao),
+lat (Latin), lav (Latvian), lit (Lithuanian), ltz (Luxembourgish), mal
+(Malayalam), mar (Marathi), mkd (Macedonian), mlt (Maltese), mon (Mongolian),
+mri (Maori), msa (Malay), mya (Burmese), nep (Nepali), nld (Dutch; Flemish), nor
+(Norwegian), oci (Occitan post 1500), ori (Oriya), osd (Orientation and script
+detection module), pan (Panjabi; Punjabi), pol (Polish), por (Portuguese), pus
+(Pushto; Pashto), que (Quechua), ron (Romanian; Moldavian; Moldovan), rus
+(Russian), san (Sanskrit), sin (Sinhala; Sinhalese), slk (Slovak), slv
+(Slovenian), snd (Sindhi), spa (Spanish; Castilian), spa_old (Spanish;
+Castilian - Old), sqi (Albanian), srp (Serbian), srp_latn (Serbian - Latin), sun
+(Sundanese), swa (Swahili), swe (Swedish), syr (Syriac), tam (Tamil), tat
+(Tatar), tel (Telugu), tgk (Tajik), tgl (Tagalog), tha (Thai), tir (Tigrinya),
+ton (Tonga), tur (Turkish), uig (Uighur; Uyghur), ukr (Ukrainian), urd (Urdu),
+uzb (Uzbek), uzb_cyrl (Uzbek - Cyrilic), vie (Vietnamese), yid (Yiddish), yor
+(Yoruba)
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-org01bd2d6">
+<h2 id="org01bd2d6">GUI for tesseract</h2>
+<p>
+<a href="https://github.com/Parathantl/tesseract_gui/releases">https://github.com/Parathantl/tesseract_gui/releases</a>
+</p>
+
+
+<div class="figure">
+<p><img src="./images/tesseract-gui_1.jpg" alt="tesseract-gui_1.jpg" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgd704963">
+<h2 id="orgd704963">GUI for tesseract</h2>
+
+<div class="figure">
+<p><img src="./images/tesseract_gui_2.jpg" alt="tesseract_gui_2.jpg" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org74cc2d9">
+<h2 id="org74cc2d9">GUI for tesseract</h2>
+
+<div class="figure">
+<p><img src="./images/tesseract_gui_3.jpg" alt="tesseract_gui_3.jpg" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org61ea7c2">
+<h2 id="org61ea7c2">GUI for tesseract</h2>
+
+<div class="figure">
+<p><img src="./images/tesseract_gui_4.jpg" alt="tesseract_gui_4.jpg" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org3de5a39">
+<h2 id="org3de5a39">GUI for tesseract - Links</h2>
+<p>
+<a href="https://github.com/Parathantl/tesseract_gui/releases">https://github.com/Parathantl/tesseract_gui/releases</a>
+</p>
+
+<p>
+How to install ? - <a href="https://www.youtube.com/watch?v=NSZmOYuEaOw">https://www.youtube.com/watch?v=NSZmOYuEaOw</a>
+</p>
+
+<p>
+How to use ? - <a href="https://www.youtube.com/watch?v=awnGGLyYqec">https://www.youtube.com/watch?v=awnGGLyYqec</a>
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org880a6d0">
+<h2 id="org880a6d0">Possibilities</h2>
+<p>
+Handwritten Text
+</p>
+
+<p>
+Palm leaves
+</p>
+
+<p>
+Estampages
+</p>
+
+<p>
+Modern / Old Books
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org084af25">
+<h2 id="org084af25">Estampages</h2>
+
+<div class="figure">
+<p><img src="./images/estampages.jpg" alt="estampages.jpg" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgcb35aa2">
+<h2 id="orgcb35aa2">Palm leaves</h2>
+
+<div class="figure">
+<p><img src="./images/palm_leave.jpg" alt="palm_leave.jpg" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgae84edf">
+<h2 id="orgae84edf">Hand Written Text</h2>
+
+<div class="figure">
+<p><img src="./images/tamil_handwritten.jpg" alt="tamil_handwritten.jpg" height="40%," width="40%" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org6f9734d">
+<h2 id="org6f9734d">Books</h2>
+
+<div class="figure">
+<p><img src="./images/old_book.jpg" alt="old_book.jpg" height="40%," width="40%" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org3f7cfba">
+<h2 id="org3f7cfba">Training</h2>
+<p>
+Using Ground Truth Files
+</p>
+
+<p>
+Using TTF Font file
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgee1e79a">
+<h2 id="orgee1e79a">Training Using Ground Truth Files</h2>
+<p>
+<a href="https://github.com/Shreeshrii/tess4training">https://github.com/Shreeshrii/tess4training</a>
+</p>
+
+<p>
+<a href="https://github.com/tesseract-ocr/tesstrain">https://github.com/tesseract-ocr/tesstrain</a>
+</p>
+
+<p>
+<a href="https://medium.com/@guiem/how-to-train-tesseract-4-ebe5881ff3b7">https://medium.com/@guiem/how-to-train-tesseract-4-ebe5881ff3b7</a>
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org8d9deb5">
+<h2 id="org8d9deb5">Ground Truth Files</h2>
+<p>
+Line by Line text for any image
+</p>
+
+
+<div class="figure">
+<p><img src="./images/1a-1.jpg" alt="1a-1.jpg" />
+</p>
+</div>
+
+<p>
+ஸ்வஸ்திஸ்ரீதிருமகளபோலபபெருநிலசசெலவியுந
+</p>
+
+
+<div class="figure">
+<p><img src="./images/1a-2.jpg" alt="1a-2.jpg" />
+</p>
+</div>
+
+<p>
+தனககேயுரிமைபூணடமைமனககொளககாந
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org1fd3f34">
+<h2 id="org1fd3f34">Training using Font File</h2>
+<p>
+<a href="https://github.com/tshrinivasan/easy_train_tesseract/">https://github.com/tshrinivasan/easy_train_tesseract/</a>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orga7cebf5">
+<h2 id="orga7cebf5">Issues</h2>
+<p>
+Automatic Image cleaning is tough
+</p>
+
+<p>
+Lack of experts to read old text
+</p>
+
+<p>
+Lack of images as open data
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org13d0d78">
+<h2 id="org13d0d78">What we need?</h2>
+<p>
+Huge ground truth files for all
+</p>
+
+<p>
+Create Tons of Fonts with different styles
+</p>
+
+<p>
+Experts to verify
+</p>
+
+<p>
+More Contributors
+</p>
+
+<p>
+Skill on image processing
+</p>
+
+<p>
+Skill on Tesseract training
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org7ce02a4">
+<h2 id="org7ce02a4">What we need ?</h2>
+<p>
+More open data
+</p>
+
+<p>
+All the Universities to release their research works in open license
+</p>
+
+<p>
+All the Govt sponsored works in open license
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org5c68a55">
+<h2 id="org5c68a55">Thanks</h2>
+</section>
+</section>
+</div>
+</div>
+<script src="file:///home/shrini/disroot-nextcloud/org-mode/reveal.js/dist/reveal.js"></script>
+<script src="file:///home/shrini/disroot-nextcloud/org-mode/reveal.js/plugin/markdown/markdown.js"></script>
+<script src="file:///home/shrini/disroot-nextcloud/org-mode/reveal.js/plugin/zoom/zoom.js"></script>
+<script src="file:///home/shrini/disroot-nextcloud/org-mode/reveal.js/plugin/notes/notes.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealMarkdown,RevealZoom,RevealNotes],
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+]
+});
+</script>
+</body>
+</html>
